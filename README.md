@@ -12,17 +12,6 @@ profiler based on IP addresses.
 
 ## Installation
 
-Add repository to `composer.json`:
-
-```json
-  "repositories": [
-    {
-      "type": "git",
-      "url": "https://github.com/hexis-hr/access-control-profiler-bundle.git"
-    }
-  ]
-```
-
 Install the `AccessControlProfilerBundle` via Composer:
 
 ```bash
@@ -51,6 +40,8 @@ access_control_profiler:
 Once installed and configured, the `AccessControlProfilerBundle` automatically restricts access to the Symfony profiler
 based on the configured IP addresses. Only requests originating from the specified IPs are granted access to the
 profiler.
+
+---
 
 ## Contributing
 

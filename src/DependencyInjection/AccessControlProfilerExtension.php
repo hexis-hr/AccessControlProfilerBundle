@@ -17,6 +17,9 @@ class AccessControlProfilerExtension extends Extension
 
     public function load(array $configs, ContainerBuilder $container)
     {
+        //this is required because of Sulu CMS :(
+        if(!class_exists('Symfony\Component\HttpKernel\Profiler\Profiler')) return;
+
         $configDir = new FileLocator(__DIR__ . '/../../config');
         $loader = new YamlFileLoader($container, $configDir);
         $loader->load('services.yaml');

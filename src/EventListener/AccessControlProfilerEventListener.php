@@ -10,15 +10,9 @@ use Symfony\Component\HttpKernel\Profiler\Profiler;
 
 final class AccessControlProfilerEventListener
 {
-    public ?Profiler $profiler;
-    public ?array $allowedProfilerIps;
-    public ?string $profilerRoute;
 
-    public function __construct(?Profiler $profiler, ?array $allowedProfilerIps, ?string $profilerRoute)
+    public function __construct(private Profiler $profiler, private ?array $allowedProfilerIps, private ?string $profilerRoute)
     {
-        $this->allowedProfilerIps = $allowedProfilerIps;
-        $this->profiler = $profiler;
-        $this->profilerRoute = $profilerRoute;
     }
 
     public function onKernelRequest(KernelEvent $event): void

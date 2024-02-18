@@ -8,6 +8,9 @@ services:
     tags:
       - { name: kernel.event_listener, event: kernel.request }
     arguments:
-      $profiler: Symfony\Component\HttpKernel\Profiler\Profiler
+      $profiler: '@profiler'
       $allowedProfilerIps: '%allowed_profiler_ips%'
       $profilerRoute: '%profiler_route%'
+when@dev:
+  services:
+    Symfony\Component\HttpKernel\Profiler\Profiler: '@profiler'

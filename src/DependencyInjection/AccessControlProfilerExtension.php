@@ -18,7 +18,7 @@ class AccessControlProfilerExtension extends Extension
     public function load(array $configs, ContainerBuilder $container)
     {
         //this is required because of Sulu CMS :(
-        if(!class_exists('Symfony\Component\HttpKernel\Profiler\Profiler')) return;
+        if (!class_exists('Symfony\Component\HttpKernel\Profiler\Profiler')) return;
 
         $configDir = new FileLocator(__DIR__ . '/../../config');
         $loader = new YamlFileLoader($container, $configDir);
@@ -27,12 +27,14 @@ class AccessControlProfilerExtension extends Extension
         $configuration = $this->getConfiguration($configs, $container);
         $config = $this->processConfiguration($configuration, $configs);
 
-        $definition = $container->getDefinition('hexis.access_control_profiler.event_listener');
+        if (isset($config['access_control_profiler'])) {
+            $definition = $container->getDefinition('hexis.access_control_profiler.event_listener');
 
-        if (isset($config['profiler_route'])) {
-            $definition->setArgument(2, $config['profiler_route']);
-        } else {
-            $definition->setArgument(2, '_profiler');
+            if (isset($config['profiler_route'])) {
+                $definition->setArgument(2, $config['profiler_route']);
+            } else {
+                $definition->setArgument(2, '_profiler');
+            }
         }
     }
 }

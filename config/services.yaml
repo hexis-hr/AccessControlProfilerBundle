@@ -2,15 +2,14 @@ parameters:
   allowed_profiler_ips: '%env(csv:ALLOWED_PROFILER_IPS)%'
   profiler_route: '_profiler'
 
-services:
-  hexis.access_control_profiler.event_listener:
-    class: Hexis\AccessControlProfilerBundle\EventListener\AccessControlProfilerEventListener
-    tags:
-      - { name: kernel.event_listener, event: kernel.request }
-    arguments:
-      $profiler: '@profiler'
-      $allowedProfilerIps: '%allowed_profiler_ips%'
-      $profilerRoute: '%profiler_route%'
 when@dev:
   services:
+    hexis.access_control_profiler.event_listener:
+      class: Hexis\AccessControlProfilerBundle\EventListener\AccessControlProfilerEventListener
+      tags:
+        - { name: kernel.event_listener, event: kernel.request }
+      arguments:
+        $profiler: '@profiler'
+        $allowedProfilerIps: '%allowed_profiler_ips%'
+        $profilerRoute: '%profiler_route%'
     Symfony\Component\HttpKernel\Profiler\Profiler: '@profiler'
